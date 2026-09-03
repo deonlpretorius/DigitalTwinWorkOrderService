@@ -7,6 +7,7 @@
     <AssemblyTitle>DigitalTwinWorkOrderService.Common</AssemblyTitle>
     <PlatformTarget>x64</PlatformTarget>
     <Description>This is project written by D.L. Pretorius for the Digital twin Work Order Service Technical Vetting Assignment.</Description>
+    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
 
   <ItemGroup>

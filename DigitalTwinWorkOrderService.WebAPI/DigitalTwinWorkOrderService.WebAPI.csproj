@@ -7,6 +7,7 @@
     <PlatformTarget>x64</PlatformTarget>
     <AssemblyTitle>DigitalTwinWorkOrderService.WebAPI</AssemblyTitle>
     <Description>This is written by D.L. Pretorius for Digital Twin as a technical vetting assingment.</Description>
+    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
