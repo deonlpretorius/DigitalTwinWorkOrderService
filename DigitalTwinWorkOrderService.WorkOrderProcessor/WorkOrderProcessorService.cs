@@ -1,15 +1,15 @@
-﻿using DigitalTwin.WorkOrderProcessor.Interfaces;
-using DigitalTwin.WorkOrderService.Models.WorkOrders;
-using DigitalTwin.WorkOrderService.WorkOrderProcessor.Data;
+﻿using DigitalTwinWorkOrderProcessor.Interfaces;
+using DigitalTwinWorkOrderService.Models.WorkOrders;
+using DigitalTwinWorkOrderService.WorkOrderProcessor.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
 /// <summary>
-/// Namespace <c>DigitalTwin.WorkOrderProcessor</c> contains the Work Order Progress Event Processor.
+/// Namespace <c>DigitalTwinWorkOrderService.WorkOrderProcessor</c> contains the Work Order Progress Event Processor.
 /// </summary>
-namespace DigitalTwin.WorkOrderService.WorkOrderProcessor
+namespace DigitalTwinWorkOrderService.WorkOrderProcessor
 {
     /// <summary>
     /// Class <c>WorkOrderProcessorWorker</c> represents the Work Order Processor as a background service.
