@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DigitalTwinWorkOrderService.Common\DigitalTwinWorkOrderService.Common.csproj" />
+  </ItemGroup>
+
 </Project>
