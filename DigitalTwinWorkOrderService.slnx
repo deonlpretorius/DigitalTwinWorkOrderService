@@ -15,5 +15,7 @@
   <Project Path="DigitalTwinWorkOrderService.WebAPI/DigitalTwinWorkOrderService.WebAPI.csproj">
     <Platform Solution="*|x64" Project="x64" />
   </Project>
-  <Project Path="DigitalTwinWorkOrderService.WorkOrderProcessor/DigitalTwinWorkOrderService.WorkOrderprocessor.csproj" DisplayName="DigitalTwinWorkOrderService.WorkOrderProcessor" Id="db74ab37-3457-40b2-a5af-b3e620c3b787" />
+  <Project Path="DigitalTwinWorkOrderService.WorkOrderProcessor/DigitalTwinWorkOrderService.WorkOrderprocessor.csproj" DisplayName="DigitalTwinWorkOrderService.WorkOrderProcessor" Id="db74ab37-3457-40b2-a5af-b3e620c3b787">
+    <Platform Solution="*|x64" Project="x64" />
+  </Project>
 </Solution>
