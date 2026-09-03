@@ -1,5 +1,6 @@
 <Solution>
   <Project Path="DigitalTwinWorkOrderService.Common/DigitalTwinWorkOrderService.Common.csproj" />
   <Project Path="DigitalTwinWorkOrderService.Models/DigitalTwinWorkOrderService.Models.csproj" />
+  <Project Path="DigitalTwinWorkOrderService.WebAPI.AutomatedTests/DigitalTwinWorkOrderService.WebAPI.AutomatedTests.csproj" />
   <Project Path="DigitalTwinWorkOrderService.WebAPI/DigitalTwinWorkOrderService.WebAPI.csproj" />
 </Solution>
