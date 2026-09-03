@@ -4,6 +4,9 @@
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <PlatformTarget>x64</PlatformTarget>
+    <AssemblyTitle>DigitalTwinWorkOrderService.WebAPI</AssemblyTitle>
+    <Description>This is written by D.L. Pretorius for Digital Twin as a technical vetting assingment.</Description>
   </PropertyGroup>
 
   <ItemGroup>
