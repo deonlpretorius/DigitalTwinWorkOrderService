@@ -1,8 +1,33 @@
+using DigitalTwinWorkOrderService.Endpoints;
+using DigitalTwinWorkOrderService.WebAPI.Data;
+using DigitalTwinWorkOrderService.WebAPI.Endpoints;
+using DigitalTwinWorkOrderService.WebAPI.Endpoints.WorkOrders;
+using DigitalTwinWorkOrderService.WebAPI.Interfaces;
+using DigitalTwinWorkOrderService.WebAPI.Interfaces.WorkOrders;
+using DigitalTwinWorkOrderService.WebAPI.Services;
+using DigitalTwinWorkOrderService.WebAPI.Services.WorkOrders;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+
+// Add the DbContext to the service container
+builder.Services.AddDbContext<WorkOrderWebServiceWebAPIDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Add the static data services.
+builder.Services.AddScoped<ISiteService, SiteService>();
+builder.Services.AddScoped<IExternalSystemService, ExternalSystemService>();
+
+// Add the Work Order services.
+builder.Services.AddScoped<IWorkOrderStatusService, WorkOrderStatusService>();
+builder.Services.AddScoped<IWorkOrderService, WorkOrderService>();
+builder.Services.AddScoped<IWorkOrderHistoryService, WorkOrderHistoryService>();
+builder.Services.AddScoped<IWorkOrderEventService, WorkOrderEventService>();
+
 
 var app = builder.Build();
 
@@ -14,28 +39,12 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast");
+// Add the endpoints.
+app.MapSiteEndpoints();
+app.MapExternalSystemEndpoint();
+app.MapWorkOrderStatusEndpoints();
+app.MapWorkOrderEndpoints();
+app.MapWorkOrderHistoryEndpoint();
+app.MapWorkOrderEventEndpoints();
 
 app.Run();
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
