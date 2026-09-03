@@ -1,4 +1,5 @@
 using DigitalTwinWorkOrderService.Endpoints;
+using DigitalTwinWorkOrderService.Models.WorkOrders;
 using DigitalTwinWorkOrderService.WebAPI.Data;
 using DigitalTwinWorkOrderService.WebAPI.Endpoints;
 using DigitalTwinWorkOrderService.WebAPI.Endpoints.WorkOrders;
@@ -19,15 +20,14 @@ builder.Services.AddDbContext<WorkOrderWebServiceWebAPIDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Add the static data services.
-builder.Services.AddScoped<ISiteService, SiteService>();
-builder.Services.AddScoped<IExternalSystemService, ExternalSystemService>();
+builder.Services.AddTransient<ISiteService, SiteService>();
+builder.Services.AddTransient<IExternalSystemService, ExternalSystemService>();
 
 // Add the Work Order services.
-builder.Services.AddScoped<IWorkOrderStatusService, WorkOrderStatusService>();
-builder.Services.AddScoped<IWorkOrderService, WorkOrderService>();
-builder.Services.AddScoped<IWorkOrderHistoryService, WorkOrderHistoryService>();
-builder.Services.AddScoped<IWorkOrderEventService, WorkOrderEventService>();
-
+builder.Services.AddTransient<IWorkOrderStatusService, WorkOrderStatusService>();
+builder.Services.AddTransient<IWorkOrderService, WorkOrderService>();
+builder.Services.AddTransient<IWorkOrderHistoryService, WorkOrderHistoryService>();
+builder.Services.AddTransient<IWorkOrderEventService, WorkOrderEventService>();
 
 var app = builder.Build();
 

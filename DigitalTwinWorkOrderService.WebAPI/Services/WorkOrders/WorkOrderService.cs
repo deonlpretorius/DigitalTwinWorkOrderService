@@ -37,12 +37,6 @@ namespace DigitalTwinWorkOrderService.WebAPI.Services.WorkOrders
         private readonly IExternalSystemService _externalSystemsService;
 
         /// <summary>
-        /// Property <c>_workOrderHistoryService</c> represents the Work Order History service.
-        /// <value>An interface representing the contract for the work order history service.</value>
-        /// </summary>
-        private readonly IWorkOrderHistoryService _workOrderHistoryService;
-
-        /// <summary>
         /// Property <c>WorkOrderServiceDbContext</c> represents the database context.
         /// <value>A class containing the data access layer.</value>
         /// </summary>
@@ -55,13 +49,11 @@ namespace DigitalTwinWorkOrderService.WebAPI.Services.WorkOrders
         public WorkOrderService(IWorkOrderStatusService workOrderStatusesService, 
                                 ISiteService sitesService, 
                                 IExternalSystemService externalSystemsService,
-                                IWorkOrderHistoryService workOrderHistoryService,
                                 WorkOrderWebServiceWebAPIDbContext dbContext)
         {
             _workOrderStatusService = workOrderStatusesService;
             _sitesService = sitesService;
             _externalSystemsService = externalSystemsService;
-            _workOrderHistoryService = workOrderHistoryService;
             _dbContext = dbContext;
         }
 
@@ -107,7 +99,7 @@ namespace DigitalTwinWorkOrderService.WebAPI.Services.WorkOrders
             if (string.IsNullOrWhiteSpace(workOrder.WorkOrderStatusId))
                 throw new Exception("The status for the work order is empty.");
 
-            var workOrderStatus = _workOrderStatusService.GetById(workOrder.WorkOrderStatusId);
+            var workOrderStatus = _dbContext.WorkOrderStatuses.Find(workOrder.WorkOrderStatusId);
             if (workOrderStatus is null)
                 throw new Exception("The work order status for the work order could not be found.");
 
@@ -163,7 +155,7 @@ namespace DigitalTwinWorkOrderService.WebAPI.Services.WorkOrders
             if (string.IsNullOrWhiteSpace(workOrder.WorkOrderStatusId))
                 throw new Exception("The status for the work order is empty.");
 
-            var workOrderStatus = await _workOrderStatusService.GetByIdAsync(workOrder.WorkOrderStatusId);
+            var workOrderStatus = await _dbContext.WorkOrderStatuses.FindAsync(workOrder.WorkOrderStatusId);
             if (workOrderStatus is null)
                 throw new Exception("The work order status for the work order could not be found.");
 
@@ -218,9 +210,9 @@ namespace DigitalTwinWorkOrderService.WebAPI.Services.WorkOrders
             {
                 foreach (var workOrder in workOrders)
                 {
-                    var workOrderHistories = _workOrderHistoryService.GetByWorkOrderId(workOrder?.WorkOrderId)
-                                                                     .Take(10)
-                                                                     .ToList();
+                    var workOrderHistories = _dbContext.WorkOrderHistories.Where(x => x.WorkOrderId!.Equals(workOrder.WorkOrderId))
+                                                                          .Take(10)
+                                                                          .ToList();
 
                     workOrder.WorkOrderHistories = workOrderHistories;
                 }
